@@ -1,9 +1,13 @@
+import 'package:difflens/cubits/text_card_cubit.dart';
 import 'package:difflens/widgets/circular_small_icon.dart';
 import 'package:difflens/widgets/lines_counter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TextCardHeader extends StatelessWidget {
-  const new({super.key, required this.title});
+  const TextCardHeader({super.key, required this.title});
+
   final String title;
 
   @override
@@ -16,7 +20,7 @@ class TextCardHeader extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
 
             const SizedBox(width: 8),
@@ -28,13 +32,20 @@ class TextCardHeader extends StatelessWidget {
             CircularSmallIcon(
               popupMessage: 'Copy',
               icon: Icons.copy_rounded,
-              onPressed: () {},
+              onPressed: () {
+                final text = context.read<TextCardCubit>().state.text;
+                if (text.isNotEmpty) {
+                  Clipboard.setData(ClipboardData(text: text));
+                }
+              },
             ),
 
             CircularSmallIcon(
               popupMessage: 'Clear',
               icon: Icons.clear_rounded,
-              onPressed: () {},
+              onPressed: () {
+                context.read<TextCardCubit>().clear();
+              },
             ),
           ],
         ),

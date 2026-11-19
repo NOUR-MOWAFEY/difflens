@@ -60,15 +60,17 @@ class LineNumberPainter extends CustomPainter {
             .localToGlobal(caretRect.topLeft, ancestor: textFieldBox)
             .dy;
       } else {
-        final scrollOffset = scrollController.hasClients
-            ? scrollController.offset
-            : 0.0;
+        final scrollOffset =
+            scrollController.hasClients ? scrollController.offset : 0.0;
         yPos =
             EditorConstants.verticalPadding + (i * lineHeight) - scrollOffset;
       }
 
       if (yPos + lineHeight >= 0 && yPos <= size.height) {
-        final textSpan = TextSpan(text: '${i + 1}', style: textStyle);
+        final textSpan = TextSpan(
+          text: '${i + 1}',
+          style: textStyle,
+        );
 
         final textPainter = TextPainter(
           text: textSpan,
@@ -79,7 +81,10 @@ class LineNumberPainter extends CustomPainter {
 
         textPainter.paint(
           canvas,
-          Offset(size.width - textPainter.width - 10, yPos + verticalOffset),
+          Offset(
+            size.width - textPainter.width - 10,
+            yPos + verticalOffset,
+          ),
         );
       }
 
@@ -88,7 +93,5 @@ class LineNumberPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant LineNumberPainter oldDelegate) {
-    return true;
-  }
+  bool shouldRepaint(covariant LineNumberPainter oldDelegate) => true;
 }
