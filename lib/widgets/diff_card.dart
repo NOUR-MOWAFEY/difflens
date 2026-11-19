@@ -8,9 +8,6 @@ class DiffCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 500,
-      width: 500,
-
       clipBehavior: .antiAlias,
 
       decoration: BoxDecoration(

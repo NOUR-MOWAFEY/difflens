@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TextCard extends StatelessWidget {
   final String title;
-  final TextCardCubit cubit; // إجباري
+  final TextCardCubit cubit;
 
   const TextCard({super.key, required this.title, required this.cubit});
 
@@ -24,7 +24,9 @@ class TextCard extends StatelessWidget {
         child: Column(
           children: [
             TextCardHeader(title: title),
+
             const Divider(color: AppColors.border, thickness: 1.5, height: 0),
+
             const TextCardBody(),
           ],
         ),

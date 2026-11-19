@@ -1,13 +1,14 @@
 import 'package:difflens/constants/app_colors.dart';
 import 'package:difflens/views/home_view.dart';
 import 'package:flutter/material.dart';
+import 'package:toastification/toastification.dart';
 
 void main() {
-  runApp(const DiffLens());
+  runApp(const ToastificationWrapper(child: DiffLens()));
 }
 
 class DiffLens extends StatelessWidget {
-  const new({super.key});
+  const DiffLens({super.key});
 
   @override
   Widget build(BuildContext context) {

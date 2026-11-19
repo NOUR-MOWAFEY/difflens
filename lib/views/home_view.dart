@@ -1,5 +1,6 @@
 // import 'package:difflens/widgets/text_card.dart';
 import 'package:difflens/cubits/text_card_cubit.dart';
+import 'package:difflens/widgets/diff_card.dart';
 import 'package:difflens/widgets/text_card.dart';
 import 'package:flutter/material.dart';
 
@@ -32,18 +33,28 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(16),
-        child: Row(
+        padding: const EdgeInsets.all(16),
+        child: Column(
           children: [
             Expanded(
-              child: TextCard(title: 'Old Text', cubit: oldTextCubit),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextCard(title: 'Old Text', cubit: oldTextCubit),
+                  ),
+
+                  const SizedBox(width: 12),
+
+                  Expanded(
+                    child: TextCard(title: 'New Text', cubit: newTextCubit),
+                  ),
+                ],
+              ),
             ),
 
-            const SizedBox(width: 12),
+            const SizedBox(height: 12),
 
-            Expanded(
-              child: TextCard(title: 'New Text', cubit: newTextCubit),
-            ),
+            const Expanded(child: DiffCard()),
           ],
         ),
       ),
