@@ -1,12 +1,17 @@
 import 'package:difflens/constants/app_colors.dart';
+import 'package:difflens/cubits/diff_card_cubit.dart';
 import 'package:difflens/widgets/custom_toggle_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DiffCardHeader extends StatelessWidget {
   const DiffCardHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<DiffCardCubit>();
+    final state = cubit.state;
+
     return Container(
       height: 60,
       padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -15,14 +20,20 @@ class DiffCardHeader extends StatelessWidget {
         children: [
           CustomToggleButton(
             label: 'Ignore case',
-            isSelected: false,
-            onPressed: () {},
+            isSelected: state.ignoreCase,
+            onPressed: cubit.toggleIgnoreCase,
           ),
           const SizedBox(width: 8),
           CustomToggleButton(
             label: 'Ignore whitespace',
-            isSelected: false,
-            onPressed: () {},
+            isSelected: state.ignoreWhitespace,
+            onPressed: cubit.toggleIgnoreWhitespace,
+          ),
+          const SizedBox(width: 8),
+          CustomToggleButton(
+            label: 'Ignore empty lines',
+            isSelected: state.ignoreEmptyLines,
+            onPressed: cubit.toggleIgnoreEmptyLines,
           ),
         ],
       ),

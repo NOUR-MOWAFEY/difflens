@@ -18,6 +18,8 @@ class LineNumberPainter extends CustomPainter {
   final String text;
   final double lineHeight;
   final double fontSize;
+  final String Function(int lineIndex)? lineNumberBuilder;
+  final Color? Function(int lineIndex)? lineNumberColorBuilder;
 
   LineNumberPainter({
     required this.textFieldKey,
@@ -25,11 +27,15 @@ class LineNumberPainter extends CustomPainter {
     required this.text,
     required this.lineHeight,
     required this.fontSize,
+    this.lineNumberBuilder,
+    this.lineNumberColorBuilder,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     canvas.clipRect(Offset.zero & size);
+
+    if (text.isEmpty) return;
 
     final textStyle = TextStyle(
       color: Colors.grey.shade600,
@@ -67,25 +73,36 @@ class LineNumberPainter extends CustomPainter {
       }
 
       if (yPos + lineHeight >= 0 && yPos <= size.height) {
-        final textSpan = TextSpan(
-          text: '${i + 1}',
-          style: textStyle,
-        );
+        final lineNum =
+            lineNumberBuilder != null ? lineNumberBuilder!(i) : '${i + 1}';
 
-        final textPainter = TextPainter(
-          text: textSpan,
-          textDirection: TextDirection.ltr,
-        )..layout();
+        if (lineNum.isNotEmpty) {
+          final customColor = lineNumberColorBuilder != null
+              ? lineNumberColorBuilder!(i)
+              : null;
 
-        final verticalOffset = (lineHeight - textPainter.height) / 2;
+          final textSpan = TextSpan(
+            text: lineNum,
+            style: customColor != null
+                ? textStyle.copyWith(color: customColor)
+                : textStyle,
+          );
 
-        textPainter.paint(
-          canvas,
-          Offset(
-            size.width - textPainter.width - 10,
-            yPos + verticalOffset,
-          ),
-        );
+          final textPainter = TextPainter(
+            text: textSpan,
+            textDirection: TextDirection.ltr,
+          )..layout();
+
+          final verticalOffset = (lineHeight - textPainter.height) / 2;
+
+          textPainter.paint(
+            canvas,
+            Offset(
+              size.width - textPainter.width - 10,
+              yPos + verticalOffset,
+            ),
+          );
+        }
       }
 
       charOffset += lines[i].length + 1;

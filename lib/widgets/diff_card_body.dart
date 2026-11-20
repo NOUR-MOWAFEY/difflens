@@ -1,8 +1,11 @@
 import 'package:difflens/constants/app_colors.dart';
 import 'package:difflens/constants/editor_constants.dart';
+import 'package:difflens/cubits/diff_card_cubit.dart';
+import 'package:difflens/models/diff_line.dart';
 import 'package:difflens/widgets/custom_text_field.dart';
 import 'package:difflens/widgets/line_numbers_gutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DiffCardBody extends StatefulWidget {
   const DiffCardBody({super.key});
@@ -12,46 +15,55 @@ class DiffCardBody extends StatefulWidget {
 }
 
 class _DiffCardBodyState extends State<DiffCardBody> {
-  late final TextEditingController _controller;
   late final ScrollController _scrollController;
   final GlobalKey _textFieldKey = GlobalKey();
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController();
     _scrollController = ScrollController();
-
-    _controller.addListener(_onChanged);
-    _scrollController.addListener(_onChanged);
+    _scrollController.addListener(_onScrollChanged);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) setState(() {});
     });
   }
 
-  void _onChanged() {
+  void _onScrollChanged() {
     setState(() {});
   }
 
   @override
   void dispose() {
-    _scrollController.removeListener(_onChanged);
-    _controller.removeListener(_onChanged);
+    _scrollController.removeListener(_onScrollChanged);
     _scrollController.dispose();
-    _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<DiffCardCubit>();
+    final state = cubit.state;
+
     return Expanded(
       child: Row(
         children: [
           LineNumbersGutter(
             textFieldKey: _textFieldKey,
             scrollController: _scrollController,
-            text: _controller.text,
+            text: state.diffText,
+            lineNumberBuilder: (i) {
+              if (i < state.lines.length && state.lines[i].oldLineNumber != null) {
+                return '${state.lines[i].oldLineNumber}';
+              }
+              return '';
+            },
+            lineNumberColorBuilder: (i) {
+              if (i < state.lines.length && state.lines[i].type == DiffType.deleted) {
+                return AppColors.diffDeleted;
+              }
+              return null;
+            },
           ),
 
           Container(width: 1, color: AppColors.border),
@@ -59,7 +71,19 @@ class _DiffCardBodyState extends State<DiffCardBody> {
           LineNumbersGutter(
             textFieldKey: _textFieldKey,
             scrollController: _scrollController,
-            text: _controller.text,
+            text: state.diffText,
+            lineNumberBuilder: (i) {
+              if (i < state.lines.length && state.lines[i].newLineNumber != null) {
+                return '${state.lines[i].newLineNumber}';
+              }
+              return '';
+            },
+            lineNumberColorBuilder: (i) {
+              if (i < state.lines.length && state.lines[i].type == DiffType.added) {
+                return AppColors.diffAdded;
+              }
+              return null;
+            },
           ),
 
           const SizedBox(width: 8),
@@ -71,7 +95,7 @@ class _DiffCardBodyState extends State<DiffCardBody> {
               ),
               child: CustomTextField(
                 key: _textFieldKey,
-                controller: _controller,
+                controller: cubit.controller,
                 scrollController: _scrollController,
                 readOnly: true,
                 hintText: 'Differences will appear here...',

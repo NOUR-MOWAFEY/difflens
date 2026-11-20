@@ -11,4 +11,9 @@ class AppColors {
   static const text = Color(0xffF8FAFB);
   static const hintText = Color(0xff7C8B9A);
   static const icon = Color(0xffF8FAFB);
+
+  static const diffAdded = Color(0xFF3FB950);
+  static const diffAddedBg = Color(0x262EA043);
+  static const diffDeleted = Color(0xFFF85149);
+  static const diffDeletedBg = Color(0x26F85149);
 }

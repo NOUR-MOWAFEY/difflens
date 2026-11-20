@@ -11,12 +11,16 @@ class LineNumbersGutter extends StatelessWidget {
     required this.scrollController,
     required this.text,
     this.width = EditorConstants.gutterWidth,
+    this.lineNumberBuilder,
+    this.lineNumberColorBuilder,
   });
 
   final GlobalKey textFieldKey;
   final ScrollController scrollController;
   final String text;
   final double width;
+  final String Function(int lineIndex)? lineNumberBuilder;
+  final Color? Function(int lineIndex)? lineNumberColorBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +46,8 @@ class LineNumbersGutter extends StatelessWidget {
               text: text,
               lineHeight: EditorConstants.lineHeight,
               fontSize: EditorConstants.fontSize,
+              lineNumberBuilder: lineNumberBuilder,
+              lineNumberColorBuilder: lineNumberColorBuilder,
             ),
             size: Size.infinite,
           ),
