@@ -3,16 +3,14 @@ import 'package:difflens/widgets/custom_toggle_button.dart';
 import 'package:flutter/material.dart';
 
 class DiffCardHeader extends StatelessWidget {
-  const new({super.key});
+  const DiffCardHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 60,
-
-      padding: EdgeInsets.symmetric(horizontal: 12),
-      decoration: BoxDecoration(color: AppColors.darkCard),
-
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      decoration: const BoxDecoration(color: AppColors.darkCard),
       child: Row(
         children: [
           CustomToggleButton(
@@ -20,9 +18,7 @@ class DiffCardHeader extends StatelessWidget {
             isSelected: false,
             onPressed: () {},
           ),
-
           const SizedBox(width: 8),
-
           CustomToggleButton(
             label: 'Ignore whitespace',
             isSelected: false,

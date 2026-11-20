@@ -2,7 +2,7 @@ import 'package:difflens/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CircularSmallIcon extends StatelessWidget {
-  const new({
+  const CircularSmallIcon({
     super.key,
     required this.popupMessage,
     required this.icon,

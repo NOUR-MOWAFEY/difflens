@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TextCardHeaderIcons extends StatelessWidget {
-  const new({super.key});
+  const TextCardHeaderIcons({super.key});
 
   @override
   Widget build(BuildContext context) {

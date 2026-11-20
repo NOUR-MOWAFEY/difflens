@@ -7,16 +7,21 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.controller,
     required this.scrollController,
+    this.hintText = 'Enter text...',
+    this.readOnly = false,
   });
 
   final TextEditingController controller;
   final ScrollController scrollController;
+  final String hintText;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
       scrollController: scrollController,
+      readOnly: readOnly,
       cursorHeight: 16,
       maxLines: null,
       expands: true,
@@ -32,11 +37,11 @@ class CustomTextField extends StatelessWidget {
         height: EditorConstants.lineHeightMultiplier,
         forceStrutHeight: true,
       ),
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         border: InputBorder.none,
         isDense: true,
-        hintText: 'Enter text...',
-        hintStyle: TextStyle(color: AppColors.hintText),
+        hintText: hintText,
+        hintStyle: const TextStyle(color: AppColors.hintText),
       ),
     );
   }

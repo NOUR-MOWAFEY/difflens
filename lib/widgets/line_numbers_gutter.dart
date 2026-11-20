@@ -10,11 +10,13 @@ class LineNumbersGutter extends StatelessWidget {
     required this.textFieldKey,
     required this.scrollController,
     required this.text,
+    this.width = EditorConstants.gutterWidth,
   });
 
   final GlobalKey textFieldKey;
   final ScrollController scrollController;
   final String text;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class LineNumbersGutter extends StatelessWidget {
         }
       },
       child: Container(
-        width: EditorConstants.gutterWidth,
+        width: width,
         decoration: const BoxDecoration(color: AppColors.darkCard),
         child: RepaintBoundary(
           child: CustomPaint(
