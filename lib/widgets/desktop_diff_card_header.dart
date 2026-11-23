@@ -4,8 +4,8 @@ import 'package:difflens/widgets/custom_toggle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DiffCardHeader extends StatelessWidget {
-  const DiffCardHeader({super.key});
+class DesktopDiffCardHeader extends StatelessWidget {
+  const DesktopDiffCardHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +18,13 @@ class DiffCardHeader extends StatelessWidget {
       decoration: const BoxDecoration(color: AppColors.darkCard),
       child: Row(
         children: [
+          const Text(
+            'Changes',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+
+          const Spacer(),
+
           CustomToggleButton(
             label: 'Ignore case',
             isSelected: state.ignoreCase,

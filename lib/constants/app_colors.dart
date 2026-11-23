@@ -12,8 +12,13 @@ class AppColors {
   static const hintText = Color(0xff7C8B9A);
   static const icon = Color(0xffF8FAFB);
 
+  static const checkActive = Color(0xff3E89E2);
+  static const checkInactive = Color(0xff687481);
+
   static const diffAdded = Color(0xFF3FB950);
   static const diffAddedBg = Color(0x262EA043);
   static const diffDeleted = Color(0xFFF85149);
   static const diffDeletedBg = Color(0x26F85149);
+  static const diffSame = Color(0xff3E89E2);
+  static const diffSameBg = Color.fromARGB(38, 62, 136, 226);
 }

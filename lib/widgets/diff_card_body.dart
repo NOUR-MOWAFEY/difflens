@@ -53,33 +53,37 @@ class _DiffCardBodyState extends State<DiffCardBody> {
             scrollController: _scrollController,
             text: state.diffText,
             lineNumberBuilder: (i) {
-              if (i < state.lines.length && state.lines[i].oldLineNumber != null) {
+              if (i < state.lines.length &&
+                  state.lines[i].oldLineNumber != null) {
                 return '${state.lines[i].oldLineNumber}';
               }
               return '';
             },
             lineNumberColorBuilder: (i) {
-              if (i < state.lines.length && state.lines[i].type == DiffType.deleted) {
+              if (i < state.lines.length &&
+                  state.lines[i].type == DiffType.deleted) {
                 return AppColors.diffDeleted;
               }
               return null;
             },
           ),
 
-          Container(width: 1, color: AppColors.border),
+          const VerticalDivider(width: 1, color: AppColors.border),
 
           LineNumbersGutter(
             textFieldKey: _textFieldKey,
             scrollController: _scrollController,
             text: state.diffText,
             lineNumberBuilder: (i) {
-              if (i < state.lines.length && state.lines[i].newLineNumber != null) {
+              if (i < state.lines.length &&
+                  state.lines[i].newLineNumber != null) {
                 return '${state.lines[i].newLineNumber}';
               }
               return '';
             },
             lineNumberColorBuilder: (i) {
-              if (i < state.lines.length && state.lines[i].type == DiffType.added) {
+              if (i < state.lines.length &&
+                  state.lines[i].type == DiffType.added) {
                 return AppColors.diffAdded;
               }
               return null;

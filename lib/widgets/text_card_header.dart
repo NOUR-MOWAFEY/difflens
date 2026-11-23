@@ -10,25 +10,22 @@ class TextCardHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16),
-      child: SizedBox(
-        height: 35,
-        child: Row(
-          children: [
-            Text(
-              title,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
 
-            const SizedBox(width: 8),
+          const SizedBox(width: 8),
 
-            const LinesCounter(),
+          const LinesCounter(),
 
-            const Spacer(),
+          const Spacer(),
 
-            const TextCardHeaderIcons(),
-          ],
-        ),
+          const TextCardHeaderIcons(),
+        ],
       ),
     );
   }

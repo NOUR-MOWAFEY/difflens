@@ -8,6 +8,10 @@ class DiffCardState {
   final bool ignoreEmptyLines;
   final List<DiffLine> lines;
   final String diffText;
+  final int addedLines;
+  final int removedLines;
+  final int sameLines;
+  final int similarityPercentage;
 
   const DiffCardState({
     this.oldText = '',
@@ -17,6 +21,10 @@ class DiffCardState {
     this.ignoreEmptyLines = false,
     this.lines = const [],
     this.diffText = '',
+    this.addedLines = 0,
+    this.removedLines = 0,
+    this.sameLines = 0,
+    this.similarityPercentage = 100,
   });
 
   DiffCardState copyWith({
@@ -27,6 +35,10 @@ class DiffCardState {
     bool? ignoreEmptyLines,
     List<DiffLine>? lines,
     String? diffText,
+    int? addedLines,
+    int? removedLines,
+    int? sameLines,
+    int? similarityPercentage,
   }) {
     return DiffCardState(
       oldText: oldText ?? this.oldText,
@@ -36,6 +48,11 @@ class DiffCardState {
       ignoreEmptyLines: ignoreEmptyLines ?? this.ignoreEmptyLines,
       lines: lines ?? this.lines,
       diffText: diffText ?? this.diffText,
+      addedLines: addedLines ?? this.addedLines,
+      removedLines: removedLines ?? this.removedLines,
+      sameLines: sameLines ?? this.sameLines,
+      similarityPercentage:
+          similarityPercentage ?? this.similarityPercentage,
     );
   }
 }
