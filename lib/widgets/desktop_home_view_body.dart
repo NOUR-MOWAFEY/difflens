@@ -1,6 +1,6 @@
 import 'package:difflens/cubits/home_cubit.dart';
-import 'package:difflens/widgets/desktop_input_section.dart';
 import 'package:difflens/widgets/desktop_diff_section.dart';
+import 'package:difflens/widgets/desktop_input_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,7 +1,5 @@
-import 'dart:developer';
-
-import 'package:difflens/constants/app_dimensions.dart';
 import 'package:difflens/cubits/home_cubit.dart';
+import 'package:difflens/widgets/adaptive_layout.dart';
 import 'package:difflens/widgets/desktop_home_view_body.dart';
 import 'package:difflens/widgets/mobile_home_view_body.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +13,9 @@ class HomeView extends StatelessWidget {
     return BlocProvider(
       create: (_) => HomeCubit(),
       child: Scaffold(
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            log(constraints.maxWidth.toString());
-            if (constraints.maxWidth < AppDimensions.mobile) {
-              return const MobileHomeViewBody();
-            }
-            return const DesktopHomeViewBody();
-          },
+        body: AdaptiveLayout(
+          desktopLayout: (_) => const DesktopHomeViewBody(),
+          mobileLayout: (_) => const MobileHomeViewBody(),
         ),
       ),
     );

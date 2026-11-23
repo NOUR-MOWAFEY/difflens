@@ -17,7 +17,10 @@ class DiffLens extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: AppColors.bg,
         primaryColor: AppColors.card,
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.card),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.card,
+          brightness: .dark,
+        ),
       ),
       home: const HomeView(),
     );
